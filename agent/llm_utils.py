@@ -77,7 +77,7 @@ def send_chat_completion_request(
 async def stream_response(model, messages, temperature, max_tokens, websocket):
     paragraph = ""
     response = ""
-    print(f"streaming response...")
+    print("streaming response...")
 
     for chunk in lc_openai.ChatCompletion.create(
             model=model,
@@ -94,7 +94,7 @@ async def stream_response(model, messages, temperature, max_tokens, websocket):
             if "\n" in paragraph:
                 await websocket.send_json({"type": "report", "output": paragraph})
                 paragraph = ""
-    print(f"streaming response complete")
+    print("streaming response complete")
     return response
 
 
