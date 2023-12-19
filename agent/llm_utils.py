@@ -87,8 +87,7 @@ async def stream_response(model, messages, temperature, max_tokens, websocket):
             provider=CFG.llm_provider,
             stream=True,
     ):
-        content = chunk["choices"][0].get("delta", {}).get("content")
-        if content is not None:
+        if (content := chunk["choices"][0].get("delta", {}).get("content")) is not None:
             response += content
             paragraph += content
             if "\n" in paragraph:
